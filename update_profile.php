@@ -29,8 +29,13 @@ if (isset($_POST['submit'])) {
     $email = $_POST['email'];
     $phone = $_POST['phone'];
     $address = $_POST['address'];
+    $password = md5($_POST['password']);
 
-    $sql = "UPDATE `users` SET `username`='$username',`email`='$email',`phone`='$phone',`address`='$address' WHERE `u_id` = $id";
+    // die($password);
+
+    $sql = "UPDATE `users` SET `username`='$username',`email`='$email',`phone`='$phone',`address`='$address', `password` = '$password' WHERE `u_id` = $id";
+    // echo $sql;
+
     $result = mysqli_query($conn, $sql);
     if ($result) {
         echo "<script>
@@ -337,7 +342,11 @@ if (isset($_POST['submit'])) {
         <input type="text" name="phone" value="<?php echo $row['phone'] ?>">
         <label for="address">Address:</label>
         <textarea name="address"><?php echo $row['address'] ?></textarea>
+        <label for="username">Password:</label>
+        <input type="text" name="password" value="">
+
         <input type="submit" name="submit" value="Update Profile">
+        
     </form>
 </body>
 
